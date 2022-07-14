@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'explomin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'explomindb', 
+        'NAME': env('DATABASE_NAME'), 
         'USER': 'postgres', 
         'PASSWORD': env('DATABASE_PASS'),
         'HOST': '127.0.0.1', 
