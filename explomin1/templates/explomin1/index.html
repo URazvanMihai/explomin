@@ -10,17 +10,32 @@
         <tr>
             
             <th>Luni</th>
-            
             <th>Marti</th>
             <th>Miercuri</th>  
             <th>Joi</th> 
             <th>Vineri</th>
             
-        </tr>    
+        </tr>
+
+        
+            
         <tr>
-            <td>Jr</td>
+            <td>
+                <select name="name" id="id">
+                    {% for x in peoples %}
+
+                    <option value={{x.name}}>{{x.name}}</option>
+
+                    {% endfor %}   
+                </select>
+                
+                
+            </td>
+
                     
         </tr>
+
+         
         
 
     </table>
