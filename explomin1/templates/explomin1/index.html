@@ -3,7 +3,7 @@
 
 <head>
     <title>Explomin</title>
-    
+
     {% load static %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" >
@@ -69,7 +69,49 @@
     <div class="container">
         <h1>Luni</h1>
         <div class="puscare">
-            <h2> puscare 1 </h2>
+            <h2>  I </h2>
+            <div class="informatii-generale">
+                <div class="detalii">
+                    <label for="browser">Cariera:
+                        <input list="browsers" name="browser" id="browser"></label>
+                            <label for="browser">Ora:
+                                <input list="browsers" name="browser" id="browser"></label>
+                </div>
+
+                <div class="echipa">
+                    <h3>Echipa</h3>
+                    
+                    <p><label for="browser">Coordonator:
+                        <select name="name" id="id">
+                   
+                            {% for x in peoples %}
+                            
+                            <option value={{x.name}}>{{x.name}}</option>
+        
+                            {% endfor %} 
+            
+                        </select></p>
+                        
+                        <p><label for="browser">Artificier:
+                            <select name="name" id="id">
+                       
+                                {% for x in peoples %}
+                                
+                                <option value={{x.name}}>{{x.name}}</option>
+            
+                                {% endfor %} 
+                
+                            </select></p>
+                    <p>Rol 1: xulescu</p>
+                    <p>Rol 1: xulescu</p>
+                    <p>Rol 1: xulescu</p>
+                    <p>Rol 1: xulescu</p>
+                </div>
+            </div>
+        </div>
+        <div class="puscare">
+            <h2> II </h2>
+
             <div class="informatii-generale">
                 <div class="detalii">
                     <p>Cariera: nume</p>
@@ -88,28 +130,8 @@
             </div>
         </div>
         <div class="puscare">
-            <h2> puscare 2 </h2>
 
-            <div class="informatii-generale">
-                <div class="detalii">
-                    <p>Cariera: nume</p>
-                    <p>Ora: 10.00</p>
-                </div>
-
-                <div class="echipa">
-                    <h3>Echipa</h3>
-                    <p> <b>Rol 1: xulescu</b></p>
-                    <p><b>Rol 3: yonescu</b></p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
-                </div>
-            </div>
-        </div>
-        <div class="puscare">
-
-            <h2> puscare 3 </h2>
+            <h2> III </h2>
             <div class="informatii-generale">
                 <!--         <img class="image"src="https://www.explomin.ro/wp-content/uploads/freshizer/6b18c4e2724655723a9c60eb31aaac03_1-1140-760-c-90.jpg"></img> -->
                 <div class="detalii">
