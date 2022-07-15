@@ -5,7 +5,9 @@
     <title>Explomin</title>
 </head>
 
+
 <body>
+    
     <table>
         <tr>
             
@@ -17,27 +19,45 @@
             
         </tr>
 
-        
-            
+                
         <tr>
+
             <td>
                 <select name="name" id="id">
+                   
                     {% for x in peoples %}
-
+                    
                     <option value={{x.name}}>{{x.name}}</option>
 
-                    {% endfor %}   
+                    {% endfor %} 
+    
                 </select>
                 
                 
             </td>
-
+            
                     
         </tr>
+        <tr>
 
-         
+            <td>
+                <select name="name" id="id">
+                   
+                    {% for x in peoples %}
+                    
+                    <option value={{x.name}}>{{x.name}}</option>
+
+                    {% endfor %} 
+    
+                </select>
+                
+                
+            </td>
+            
+                    
+        </tr>
         
-
+       
     </table>
 </body>
     

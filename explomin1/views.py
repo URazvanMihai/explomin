@@ -15,6 +15,8 @@ def index(request):
   }
   return HttpResponse(template.render(context, request))
   
-# def add(request):
-#   template = loader.get_template('add.html')
-#   return HttpResponse(template.render({}, request))
+# def add(new_people):
+#     people = People.objects.create(name="Alex")
+    
+#     template = loader.get_template('explomin1/index.html')
+#     return HttpResponse(template.render({}, new_people))
