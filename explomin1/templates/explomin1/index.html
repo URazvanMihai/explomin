@@ -72,10 +72,10 @@
             <h2>  I </h2>
             <div class="informatii-generale">
                 <div class="detalii">
-                    <label for="browser">Cariera:
-                        <input list="browsers" name="browser" id="browser"></label>
-                            <label for="browser">Ora:
-                                <input list="browsers" name="browser" id="browser"></label>
+                    <p><label for="browser">Cariera:
+                        <input list="browser" name="browser" id="browser"></label></p>
+                    <p><label for="browser">Ora:
+                        <input input type="time"></label></p>
                 </div>
 
                 <div class="echipa">
@@ -97,15 +97,21 @@
                        
                                 {% for x in peoples %}
                                 
-                                <option value={{x.name}}>{{x.name}}</option>
+                                <option value={{x.name}} >{{x.name}}</option>
             
                                 {% endfor %} 
                 
                             </select></p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
+                    <p><label for="browser">Echipa:
+                        <select name="name" id="id"multiple>
+                            {% for x in peoples %}
+                                
+                            <option value={{x.name}} >{{x.name}}</option>
+    
+                            {% endfor %} 
+        
+                        </select></p>
+                    
                 </div>
             </div>
         </div>
@@ -114,18 +120,46 @@
 
             <div class="informatii-generale">
                 <div class="detalii">
-                    <p>Cariera: nume</p>
-                    <p>Ora: 10.00</p>
+                    <p><label for="browser">Cariera:
+                        <input list="browsers" name="browser" id="browser"></label></p>
+                    <p><label for="browser">Ora:
+                        <input input type="time"></label></p>
                 </div>
 
                 <div class="echipa">
                     <h3>Echipa</h3>
-                    <p> <b>Rol 1: xulescu</b></p>
-                    <p><b>Rol 3: yonescu</b></p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
+                    
+                    <p><label for="browser">Coordonator:
+                        <select name="name" id="id">
+                   
+                            {% for x in peoples %}
+                            
+                            <option value={{x.name}}>{{x.name}}</option>
+        
+                            {% endfor %} 
+            
+                        </select></p>
+                        
+                        <p><label for="browser">Artificier:
+                            <select name="name" id="id">
+                       
+                                {% for x in peoples %}
+                                
+                                <option value={{x.name}} >{{x.name}}</option>
+            
+                                {% endfor %} 
+                
+                            </select></p>
+                    <p><label for="browser">Echipa:
+                        <select name="name" id="id"multiple>
+                            {% for x in peoples %}
+                                
+                            <option value={{x.name}} >{{x.name}}</option>
+    
+                            {% endfor %} 
+        
+                        </select></p>
+                    
                 </div>
             </div>
         </div>
@@ -135,22 +169,50 @@
             <div class="informatii-generale">
                 <!--         <img class="image"src="https://www.explomin.ro/wp-content/uploads/freshizer/6b18c4e2724655723a9c60eb31aaac03_1-1140-760-c-90.jpg"></img> -->
                 <div class="detalii">
-                    <p>Cariera: nume</p>
-                    <p>Ora: 10.00</p>
+                    <p><label for="browser">Cariera:
+                        <input list="browsers" name="browser" id="browser"></label></p>
+                    <p><label for="browser">Ora:
+                        <input input type="time"></label></p>
                 </div>
 
                 <div class="echipa">
                     <h3>Echipa</h3>
-                    <p> <b>Rol 1: xulescu</b></p>
-                    <p><b>Rol 3: yonescu</b></p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
-                    <p>Rol 1: xulescu</p>
+                    
+                    <p><label for="browser">Coordonator:
+                        <select name="name" id="id">
+                   
+                            {% for x in peoples %}
+                            
+                            <option value={{x.name}}>{{x.name}}</option>
+        
+                            {% endfor %} 
+            
+                        </select></p>
+                        
+                        <p><label for="browser">Artificier:
+                            <select name="name" id="id">
+                       
+                                {% for x in peoples %}
+                                
+                                <option value={{x.name}} >{{x.name}}</option>
+            
+                                {% endfor %} 
+                
+                            </select></p>
+                    <p><label for="browser">Echipa:
+                        <select name="name" id="id"multiple>
+                            {% for x in peoples %}
+                                
+                            <option value={{x.name}} >{{x.name}}</option>
+    
+                            {% endfor %} 
+        
+                        </select></p>
+                    
                 </div>
             </div>
         </div>
-    </div>
+        <div class="puscare">
 </body>
 
 
