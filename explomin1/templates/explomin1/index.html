@@ -11,69 +11,25 @@
 
 
 <body>
-    <!--     
-    <table>
-        <tr>
-            
-            <th>Luni</th>
-            <th>Marti</th>
-            <th>Miercuri</th>  
-            <th>Joi</th> 
-            <th>Vineri</th>
-            
-        </tr>
-
-                
-        <tr>
-
-            <td>
-                <select name="name" id="id">
-                   
-                    {% for x in peoples %}
-                    
-                    <option value={{x.name}}>{{x.name}}</option>
-
-                    {% endfor %} 
     
-                </select>
-                
-                
-            </td>
-            
-                    
-        </tr>
-        <tr>
-
-            <td>
-                <select name="name" id="id">
-                   
-                    {% for x in peoples %}
-                    
-                    <option value={{x.name}}>{{x.name}}</option>
-
-                    {% endfor %} 
-    
-                </select>
-                
-                
-            </td>
-            
-                    
-        </tr>
-        
-       
-    </table> -->
-
-    <!-- ---------------------------------------------------------------------------- -->
-
+    {% for x in days %}
     <div class="container">
-        <h1>Luni</h1>
+        <h1>{{x}}</h1>
         <div class="puscare">
+            
             <h2>  I </h2>
             <div class="informatii-generale">
                 <div class="detalii">
                     <p><label for="browser">Cariera:
-                        <input list="browser" name="browser" id="browser"></label></p>
+                        <select name="location" id="id">
+                   
+                            {% for x in locations %}
+                            
+                            <option value={{x.location}}>{{x.location}}</option>
+        
+                            {% endfor %} 
+            
+                        </select></p>
                     <p><label for="browser">Ora:
                         <input input type="time"></label></p>
                 </div>
@@ -103,7 +59,7 @@
                 
                             </select></p>
                     <p><label for="browser">Echipa:
-                        <select name="name" id="id"multiple>
+                        <select name="name" id="id" multiple>
                             {% for x in peoples %}
                                 
                             <option value={{x.name}} >{{x.name}}</option>
@@ -111,7 +67,8 @@
                             {% endfor %} 
         
                         </select></p>
-                    
+                        <input type = "submit" value = "Submit">
+                    </label></p>
                 </div>
             </div>
         </div>
@@ -151,7 +108,7 @@
                 
                             </select></p>
                     <p><label for="browser">Echipa:
-                        <select name="name" id="id"multiple>
+                        <select name="name" id="id" multiple>
                             {% for x in peoples %}
                                 
                             <option value={{x.name}} >{{x.name}}</option>
@@ -159,6 +116,8 @@
                             {% endfor %} 
         
                         </select></p>
+                        <input type = "submit" value = "Submit">
+
                     
                 </div>
             </div>
@@ -189,6 +148,10 @@
             
                         </select></p>
                         
+
+
+
+                        
                         <p><label for="browser">Artificier:
                             <select name="name" id="id">
                        
@@ -199,20 +162,25 @@
                                 {% endfor %} 
                 
                             </select></p>
+
+                            
+
                     <p><label for="browser">Echipa:
-                        <select name="name" id="id"multiple>
+                        <select name="name" id="id" multiple>
                             {% for x in peoples %}
                                 
-                            <option value={{x.name}} >{{x.name}}</option>
+                            <option value="{{x.name}}" >{{x.name}}</option>
     
                             {% endfor %} 
-        
+                            
                         </select></p>
-                    
+                        <input type = "submit" value = "Submit">
+                        
                 </div>
             </div>
         </div>
-        <div class="puscare">
+    </div>    
+        {% endfor %}
 </body>
 
 

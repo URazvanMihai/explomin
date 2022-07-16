@@ -3,25 +3,23 @@ from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from explomin1.models import  People
+from explomin1.models import  People, Locations
 
 # Create your views here.
 
 def index(request):
+  
+  days = ['Luni', 'Marti', 'Miercuri', 'Joi',' Vineri']
+  locations = Locations.objects.all().values()
   peoples = People.objects.all().values()
   template = loader.get_template('explomin1/index.html')
   context = {
     'peoples': peoples,
+    'locations': locations,
+    'days': days
   }
   return HttpResponse(template.render(context, request))
 
-# def index(request):
-#   locations = Locations.objects.all().values()
-#   template = loader.get_template('explomin1/index.html')
-#   context = {
-#     'locations': locations,
-#   }
-#   return HttpResponse(template.render(context, request))
 
 
  
@@ -32,10 +30,7 @@ def index(request):
 #     template = loader.get_template('explomin1/index.html')
 #     return HttpResponse(template.render({}, new_people))
 
-# def add(new_days):
-#   days = new_days.object.create(["Luni","Marti","Miercuri","Joi","Vineri"])
-#   template = loader.get_template('explomin1/index.html')
-#   return HttpResponse(template.render({}, days))
+
     
   
 
