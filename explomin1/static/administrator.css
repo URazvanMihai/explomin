@@ -10,7 +10,6 @@
     border: 1px solid black;
     width: 30%;
     flex-direction: column;
-    background-color: red;
 }
 
 .informatii-generale {
@@ -38,7 +37,7 @@
 }
 
 .echipa {
-    padding: 20px;
+    padding: 10px;
 }
 
 .azot {
@@ -50,8 +49,7 @@
 
 /* Check-box */
 
-
-/* .dropdown-check-list {
+.dropdown-check-list {
     display: inline-block;
 }
 
@@ -101,4 +99,4 @@
 
 .dropdown-check-list.visible .items {
     display: block;
-  } */
+}
