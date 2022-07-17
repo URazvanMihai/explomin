@@ -13,98 +13,104 @@
 
 <body>
     {% csrf_token %} {% for x in days %}
-    <div class="container">
+    <div class="admin-container">
         <h1>{{x}}</h1>
         {% for x in job %}
-        <div class="puscare">
-
+        <div class="admin-job">
             <h2>{{x}}</h2>
-            <div class="informatii-generale">
-                <div class="detalii">
-                    <label for="browser">Cariera:
-                        <select name="location" id="id">
-                   
-                            {% for x in locations %}
-                            
-                            <option value={{x.location}}>{{x.location}}</option>
-        
-                            {% endfor %}  
-            
-                        </select>
-                    <label for="browser">Ora:
-                        <input input type="time"></label>
-                    <div class="azot">
-                        <label for="azot">Azot</label>
-                        <select name="azot" id="id">
-
-                   
-                            {% for x in peoples %}
-                        
-                            <option value={{x.name}}>{{x.name}}</option>
-    
-                            {% endfor %} 
-        
-                         </select>
-                    </div>
-
-
+            <div class="admin-detalii">
+                <div>
+                    <label for="cariera">Cariera: </label>
+                    <select name="cariera" id="id">        
+                        {% for x in locations %}                     
+                            <option value={{x.location}}>{{x.location}}</option>    
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="browser">Ora: </label>
+                    <input input type="time" />
                 </div>
 
-                <div class="echipa">
-                    <h3>Echipa</h3>
+                <div class="azot">
+                    <label for="azot ">Azot</label>
+                    <select name="azot" id="id">
+                        {% for x in peoples %}
+                            <option value={{x.name}}>{{x.name}}</option>
+                        {% endfor %} 
+                        </select>
+                </div>
 
+                <p class="titlu-echipa">Echipa</p>
+                <div>
                     <label for="browser">Coordonator:</label>
                     <select name="name" id="id">
+               
+                            {% for x in peoples %}
+                            
+                                <option value={{x.name}}>{{x.name}}</option>
+        
+                            {% endfor %} 
+        
+                        </select>
+                </div>
+
+                <div>
+                    <label for="browser">Artificier:</label>
+                    <select name="name" id="id">
                    
                             {% for x in peoples %}
                             
-                            <option value={{x.name}}>{{x.name}}</option>
+                            <option value={{x.name}} >{{x.name}}</option>
         
                             {% endfor %} 
             
                         </select>
-
-                    <label for="browser">Artificier:</label>
-                    <select name="name" id="id">
-                       
-                                {% for x in peoples %}
-                                
-                                <option value={{x.name}} >{{x.name}}</option>
-            
-                                {% endfor %} 
-                
-                            </select>
-                    <div id="list1" class="dropdown-check-list">
-                        <select class="anchor" for="echipa">Echipa:
-                        <label  name="echipa" id="id" ></label>
-                            
-                            {% for x in peoples %}           
-                                
-                            <li><option>{{x.name}}</option></li>
-    
-                            {% endfor %}
-                            
-                        </select>
-                        <div id="list1" class="dropdown-check-list" tabindex="100">
-                            <span class="anchor" for="echipa">Echipa:</span>
-                            <ul type="checkbox" name="echipa" id="id">
-
-                                {% for x in peoples %}
-
-                                <li><input type="checkbox">{{x.name}}</li>
-
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <input type="submit" value="Submit">
-
-                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
+
+            <div class="collapse-echipa">
+                <button type="button" class="collapsible">Alege membrii echipei <i class="arrow up"></i></button>
+                <div class="content">
+                    {% for x in peoples %}
+                    <div class="person-container">
+                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                        <label for="vehicle1" value={{x.name}}> {{x.name}}</label>
+                        <select name="vehicle1" class="car" id="cars">
+                                 <option  value="volvo">Volvo</option>
+                                 <option value="saab">Saab</option>
+                                 <option value="opel">Opel</option>
+                                 <option value="audi">Audi</option>
+                                </select>
+                    </div>
+
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <input type="submit" value="Submit" />
+        </div> {% endfor %}
+
     </div>
     {% endfor %}
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
 
 </body>
 

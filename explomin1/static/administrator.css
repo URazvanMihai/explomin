@@ -1,102 +1,85 @@
-.container {
+.admin-container {
     display: inline-felx;
     flex-direction: row;
     text-align: center;
-    max-width: 1500px;
 }
 
-.puscare {
+.admin-job {
     display: inline-flex;
     border: 1px solid black;
     width: 30%;
+    min-width: 250px;
     flex-direction: column;
+    padding: 5px;
+    text-align: center;
 }
 
-.informatii-generale {
-    /*   border: 1px solid black; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    z-index: 10;
-}
-
-
-/* .image{
-    opacity: 0.5;
-    display: flex;
-    position:absolute;
-    z-index: 1;
-    width:100%;
-      height:100%;
-      object-fit: cover;
-  
-  } */
-
-.detalii {
-    padding: 10px;
-}
-
-.echipa {
-    padding: 10px;
+.admin-detalii {
+    text-align: left;
+    padding: 10px 20px;
 }
 
 .azot {
-    display: flex;
-    /* text-align:center; */
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
-
-/* Check-box */
-
-.dropdown-check-list {
-    display: inline-block;
+.titlu-echipa {
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0;
+    margin: 10px 0;
 }
 
-.dropdown-check-list .anchor {
-    position: relative;
+.collapse-echipa {
+    margin: 10px 0;
+    text-align: left;
+}
+
+.collapsible {
+    background-color: #eee;
+    color: #444;
     cursor: pointer;
-    display: inline-block;
-    padding: 5px 50px 5px 10px;
-    border: 1px solid #ccc;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
 }
 
-.dropdown-check-list .anchor:after {
-    position: absolute;
-    content: "";
-    border-left: 2px solid black;
-    border-top: 2px solid black;
-    padding: 5px;
-    right: 10px;
-    top: 20%;
-    -moz-transform: rotate(-135deg);
-    -ms-transform: rotate(-135deg);
-    -o-transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-    transform: rotate(-135deg);
-}
-
-.dropdown-check-list .anchor:active:after {
-    right: 8px;
-    top: 21%;
-}
-
-.dropdown-check-list ul.items {
-    padding: 2px;
+.content {
+    padding: 0 10px;
     display: none;
-    margin: 0;
-    border: 1px solid #ccc;
-    border-top: none;
+    overflow: hidden;
 }
 
-.dropdown-check-list ul.items li {
-    list-style: none;
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
+.active,
+.collapsible:hover {
+    background-color: #ccc;
 }
 
-.dropdown-check-list.visible .anchor {
-    color: #0094ff;
+.person-container {
+    padding: 7px;
+    border-bottom: 1px solid lightgrey;
 }
 
-.dropdown-check-list.visible .items {
-    display: block;
+.car {
+    float: right;
+}
+
+.arrow:hover {
+    transform: rotateZ(45deg);
+    transition: all 0.4s ease;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transition: all 0.4s ease;
+    transform: rotate(-135deg);
 }
