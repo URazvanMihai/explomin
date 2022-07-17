@@ -6,19 +6,19 @@
 
     {% load static %}
 
-    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
     <script src="{% static 'java.js' %}"></script>
 </head>
 
 
 <body>
-    
+
     {% for x in days %}
     <div class="container">
         <h1>{{x}}</h1>
         {% for x in job %}
         <div class="puscare">
-            
+
             <h2>{{x}}</h2>
             <div class="informatii-generale">
                 <div class="detalii">
@@ -35,7 +35,7 @@
                     <label for="browser">Ora:
                         <input input type="time"></label>
                     <div class="azot">
-                    <label  for="azot">Azot</label>
+                        <label for="azot">Azot</label>
                         <select name="azot" id="id">
 
                    
@@ -45,17 +45,17 @@
     
                             {% endfor %} 
         
-                         </select> 
-                        </div>    
-                       
-                       
+                         </select>
+                    </div>
+
+
                 </div>
 
                 <div class="echipa">
                     <h3>Echipa</h3>
-                    
+
                     <label for="browser">Coordonator:</label>
-                        <select name="name" id="id">
+                    <select name="name" id="id">
                    
                             {% for x in peoples %}
                             
@@ -64,9 +64,9 @@
                             {% endfor %} 
             
                         </select>
-                        
-                        <label for="browser">Artificier:</label>
-                            <select name="name" id="id">
+
+                    <label for="browser">Artificier:</label>
+                    <select name="name" id="id">
                        
                                 {% for x in peoples %}
                                 
@@ -75,27 +75,27 @@
                                 {% endfor %} 
                 
                             </select>
-                    <div id="list1" class="dropdown-check-list" tabindex="100">  
-                    <span class="anchor" for="echipa">Echipa:</span>
-                        <ul type="checkbox" name="echipa" id="id" >
-                            
-                            {% for x in peoples %}           
-                                
+                    <div id="list1" class="dropdown-check-list" tabindex="100">
+                        <span class="anchor" for="echipa">Echipa:</span>
+                        <ul type="checkbox" name="echipa" id="id">
+
+                            {% for x in peoples %}
+
                             <li><input type="checkbox">{{x.name}}</li>
-    
+
                             {% endfor %}
-                            
-        
+
+
                         </ul>
-                    </div>  
-                        <input type = "submit" value = "Submit">
-                        
+                    </div>
+                    <input type="submit" value="Submit">
+
                 </div>
             </div>
         </div>
         {% endfor %}
-        
-    </div>    
+
+    </div>
     {% endfor %}
 </body>
 
