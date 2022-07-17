@@ -10,6 +10,7 @@
     border: 1px solid black;
     width: 30%;
     flex-direction: column;
+    background-color: red;
 }
 
 .informatii-generale {
@@ -37,24 +38,20 @@
 }
 
 .echipa {
-    padding: 10px;
+    padding: 20px;
 }
 
 .azot {
-
-    display:flex;
+    display: flex;
     /* text-align:center; */
-    margin-top:100px;
-
-
-
+    margin-top: 100px;
 }
 
 
 /* Check-box */
 
 
-.dropdown-check-list {
+/* .dropdown-check-list {
     display: inline-block;
   }
   
@@ -104,4 +101,4 @@
   
   .dropdown-check-list.visible .items {
     display: block;
-  }
+  } */

@@ -12,6 +12,7 @@
 
 
 <body>
+    {% csrf_token %}
     
     {% for x in days %}
     <div class="container">
@@ -75,17 +76,17 @@
                                 {% endfor %} 
                 
                             </select>
-                    <div id="list1" class="dropdown-check-list" tabindex="100">  
-                    <span class="anchor" for="echipa">Echipa:</span>
-                        <ul type="checkbox" name="echipa" id="id" >
+                    <div id="list1" class="dropdown-check-list" >  
+                        <select class="anchor" for="echipa">Echipa:
+                        <label  name="echipa" id="id" ></label>
                             
                             {% for x in peoples %}           
                                 
-                            <li><input type="checkbox">{{x.name}}</li>
+                            <li><option>{{x.name}}</option></li>
     
                             {% endfor %}
                             
-        
+                        </select>        
                         </ul>
                     </div>  
                         <input type = "submit" value = "Submit">
