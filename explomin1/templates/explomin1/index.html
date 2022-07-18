@@ -22,73 +22,35 @@
             <h2>{{x}}</h2>
             <div class="informatii-generale">
                 <div class="detalii">
-                    <label for="browser" >Cariera:
-                        <select name="location" id="id">
-                   
-                            {% for x in locations %}
-                            
-                            <option value={{x.location}}>{{x.location}}</option>
-        
-                            {% endfor %}  
-            
-                        </select>
-                    <label for="browser">Ora:
-                        <input input type="time"></input>
-                    <div class="azot">
-                        <label for="azot">Azot</label>
-                        <select name="azot" id="id">
+                    <p>Cariera: {{x.location}}</p>
 
-                   
-                            {% for x in peoples %}
-                        
-                            <option value={{x.name}}>{{x.name}}</option>
-    
-                            {% endfor %} 
-        
-                         </select>
+                    <p>Ora: {{x.time}}</p>
+
+                    <div class="azot">
+                        <p>Azot: {{x.name}}</p>
                     </div>
 
 
                 </div>
 
                 <div class="echipa">
-                    <h3>Echipa</h3>
+                    <h4>Echipa</h4>
 
-                    <label for="browser">Coordonator:</label>
-                    <select name="name" id="id">
-                   
-                            {% for x in peoples %}
-                            
-                            <option value={{x.name}}>{{x.name}}</option>
-        
-                            {% endfor %} 
-            
-                        </select>
-
-                    <label for="browser">Artificier:</label>
-                    <select name="name" id="id">
-                       
-                                {% for x in peoples %}
-                                
-                                <option value={{x.name}} >{{x.name}}</option>
-            
-                                {% endfor %} 
-                
-                            </select>
-                    <div id="list1" class="dropdown-check-list" tabindex="100">  
-                        <span class="anchor" for="echipa">Echipa:</span>
-                        <ul type="checkbox" name="echipa" id="id" >
-                            
-                            {% for x in peoples %}           
-                                
-                            <li><input type="checkbox">{{x.name}}</li>
-
-                            {% endfor %}
+                    <p>Coordonator: {{x.name}}</p>
 
 
-                        </ul>
+                    <p>Artificier: {{x.name}}</p>
+
+                    <div class="echipa-ajutor">
+
+                        {% for x in peoples %}
+
+                        <p>{{x.name}}</p>
+
+                        {% endfor %}
+
+
                     </div>
-                    <input type="submit" value="Submit">
 
                 </div>
             </div>
