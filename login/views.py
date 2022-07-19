@@ -1,15 +1,18 @@
 
+
 from django.shortcuts import render, redirect
 
 from django.template import loader
-from django.http import HttpResponse 
-from django.contrib.auth import authenticate, login
+from django.http import HttpResponse, HttpResponseRedirect 
+from django.contrib.auth import authenticate, login 
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
 
 # Create your views here.
 
 
-def login(request):
+def index(request):
   template = loader.get_template('login.html')
   context = {
   }
@@ -37,20 +40,21 @@ def login(request):
 #     else:
 #         # Return an 'invalid login' error message.
 #         ...      
-
+@csrf_protect
 def login_user(request):
-    if request.metod == "POST":
+    if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
-            return redirect('administrator.html')
+            # HttpResponseRedirect.allowed_schemes.append('administrator')
+            return redirect('administrator')
         else:
-            # messages.success(request), ("Error Logging in")
-            return redirect('login.html')    
+            messages.success(request, ("Error Logging In"))
+            return redirect('login')    
 
-
-    else: render(request, 'login.html')
+    else:
+        return render(request, 'signin')
 
 
