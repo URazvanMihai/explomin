@@ -33,7 +33,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
-            return redirect('administrator:index')
+            return redirect('meniu')
         else:
             messages.success(request, ("Error Logging In"))
             return redirect('login')    
@@ -42,3 +42,9 @@ def login_user(request):
         return render(request, 'signin')
 
 
+def meniu(request):
+    template = loader.get_template('meniu.html')
+    context = {
+        
+    }
+    return HttpResponse(template.render(context, request))
