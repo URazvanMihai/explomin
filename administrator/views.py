@@ -10,7 +10,7 @@ def index(request):
   days = ['Luni', 'Marti', 'Miercuri', 'Joi',' Vineri']
   locations = Locations.objects.all().values()
   peoples = People.objects.all().values()
-  template = loader.get_template('user/administrator.html')
+  template = loader.get_template('administrator.html')
   context = {
     'peoples': peoples,
     'locations': locations,
