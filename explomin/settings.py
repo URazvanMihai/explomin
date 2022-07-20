@@ -40,7 +40,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'login',
-    'explomin1',
+    'user',
     'livereload',
     'administrator',
     'django.contrib.admin',

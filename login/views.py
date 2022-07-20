@@ -19,28 +19,13 @@ def index(request):
   return HttpResponse(template.render(context, request))
 
 
-# def loginverification(request):
-#     # # user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
-#     # user.last_name = 'Lennon'
-#     # user.save()
-   
-   
+def loginverification(request):
+    user = User.objects.create_user('a', 'lennon@thebeatles.com', 'b')
+    user.last_name = 'Lennon'
+    user.save()
+    return HttpResponse()
 
-#     return HttpResponse() 
-
-
-# def my_view(request):
-#     username = request.POST['username']
-#     password = request.POST['password']
-#     user = authenticate(request, username=username, password=password)
-#     if user is not None:
-#         login(request, user)
-#         # Redirect to a success page.
-#         ...
-#     else:
-#         # Return an 'invalid login' error message.
-#         ...      
-@csrf_protect
+@csrf_protect  
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -48,8 +33,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
-            # HttpResponseRedirect.allowed_schemes.append('administrator')
-            return redirect('administrator')
+            return redirect('administrator:index')
         else:
             messages.success(request, ("Error Logging In"))
             return redirect('login')    

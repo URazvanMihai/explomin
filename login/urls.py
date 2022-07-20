@@ -1,12 +1,8 @@
 from . import views
 from django.urls import path
 
-
-
-urlpatterns = [
-    
+urlpatterns = [ 
     path("", views.index, name="login"),
-    path("buttonA", views.login_user),
+    path("buttonA", views.loginverification),
     path("signin", views.login_user, name="signin")
-
 ]
