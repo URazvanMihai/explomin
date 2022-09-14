@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect 
-from django.contrib.auth import authenticate, login 
+from django.contrib.auth import authenticate, login ,logout
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
@@ -48,3 +48,9 @@ def meniu(request):
         
     }
     return HttpResponse(template.render(context, request))
+
+def logout_view(request):
+    username = login_user(request)
+    if username != None:
+        logout(request)
+        return redirect('login')

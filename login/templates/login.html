@@ -11,8 +11,10 @@
 
 <body>
     <!-- {% include "meniu.html" %} -->
-    <form class="form-contianer" action="signin" method="post">
+    
+    <form class="form-contianer" action="logout" method="post">
         {% csrf_token %}
+        
         <div class="container">
 
             <label for="uname"><b>Username</b></label>
