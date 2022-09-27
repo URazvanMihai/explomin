@@ -49,8 +49,8 @@ def meniu(request):
     }
     return HttpResponse(template.render(context, request))
 
-def logout_view(request):
-    username = login_user(request)
-    if username != None:
-        logout(request)
-        return redirect('login')
+# def logout_view(request):
+#     username = login_user(request)
+#     if username != None:
+#         logout(request)
+#         return redirect('login')
