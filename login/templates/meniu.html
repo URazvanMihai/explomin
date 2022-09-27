@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        {% load static %}
-    
-        <link rel="stylesheet" type="text/css" href="{% static 'meniu.css' %}">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    </head>
+
+<head>
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'meniu.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
 <body>
-    
+
     <form class="form-contianer" action="logout" method="post">
-        
-        <button>
+        {% csrf_token %}
+
+        <button type="submit">Log Out</button>
+
+        <!-- <button>
             <a  class = logout >Log Out</a>
 
-        </button>
-    </form>   
+        </button> -->
+    </form>
 
 
-<ul>
-  <li><a href="#AAA">Program lucru</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
-  
-</ul>
+    <ul>
+        <li><a href="#AAA">Program lucru</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+
+    </ul>
 
 
 </body>
+
 </html>
-
-
