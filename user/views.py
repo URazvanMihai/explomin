@@ -20,3 +20,12 @@ def index(request):
     'job':job,
   }
   return HttpResponse(template.render(context, request))
+
+
+
+def pontaj(request):
+  template = loader.get_template('user/pontaj.html')
+  context = {
+
+  }
+  return HttpResponse(template.render(context, request)) 
