@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    {% load static %}
+    {% load static %} {% load permission_tags %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'meniu.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,9 @@
 
     <ul>
         <li><a href="/user">Program lucru</a></li>
+        {% if user|has_role:'admin' %}
         <li><a href="/administrator">Modificare program lucru</a></li>
+        {% endif %}
         <li><a href="/pontaj">Pontaj</a></li>
         <li><a href="#contact">Contact</a></li>
 
