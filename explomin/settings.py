@@ -41,7 +41,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'login',
     'user',
-    'livereload',
     'administrator',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,7 +51,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'livereload.middleware.LiveReloadScript',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
