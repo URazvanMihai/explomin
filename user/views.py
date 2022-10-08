@@ -24,7 +24,7 @@ def index(request):
 
 
 def pontaj(request):
-  template = loader.get_template('user/pontaj.html')
+  template = loader.get_template('pontaj.html')
   context = {
 
   }
