@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login ,logout
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
+from rolepermissions.roles import assign_role
 # Create your views here.
 
 
@@ -18,11 +19,18 @@ def index(request):
   return HttpResponse(template.render(context, request))
 
 
+# def loginverification(request):
+#     user = User.objects.create_user('a', 'lennon@thebeatles.com', 'b')
+#     user.last_name = 'Lennon'
+#     user.save()
+#     return HttpResponse()
+
 def loginverification(request):
-    user = User.objects.create_user('a', 'lennon@thebeatles.com', 'b')
-    user.last_name = 'Lennon'
-    user.save()
+    user = User.objects.get(id=1)
+    assign_role(user, 'user')
     return HttpResponse()
+
+
 
 @csrf_protect  
 def login_user(request):

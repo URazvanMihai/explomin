@@ -41,7 +41,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'login',
     'user',
-    
+    'rolepermissions',
     'administrator',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -138,3 +138,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Roles
+ROLEPERMISSIONS_MODULE = 'explomin.roles'
