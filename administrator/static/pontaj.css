@@ -1,0 +1,37 @@
+/* table {
+    border: 2px solid black ;
+    border-collapse: collapse;
+    width:100%;
+    padding: 15px;
+    
+    
+
+
+} */
+.container > div {
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    font-size: 30px;
+    border:1px solid black;
+    
+    
+    width:50%;
+}
+
+
+.container {
+    display: flex;
+    border:1px solid black;
+    border-collapse: collapse;
+    width:100%;
+    
+    
+
+
+}
+
+h1 {
+    text-align:center;
+} 
+
