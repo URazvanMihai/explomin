@@ -2,8 +2,10 @@ asgiref==3.5.2
 certifi==2022.6.15
 distlib==0.3.4
 Django==4.0.6
+django-discover-runner==1.0
 django-environ==0.9.0
 django-filter==22.1
+django-role-permissions==3.1.1
 djangorestframework==3.13.1
 filelock==3.7.1
 Markdown==3.3.7
