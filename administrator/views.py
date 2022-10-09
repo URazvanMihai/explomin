@@ -82,7 +82,7 @@ def login_user(request):
             login(request,user)
             return redirect('administrator:meniu')
         else:
-            messages.success(request, ("Error Logging In"))
+            messages.error(request, "Error Logging In")
             return redirect('administrator:login')    
 
     else:
