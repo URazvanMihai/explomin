@@ -5,7 +5,7 @@ table ,th,td {
 }
 
 table,tr {
-    width:100%;
+    width:90%;
 }
 
 
@@ -19,6 +19,16 @@ h1 {
 }
 
 .box-text {
-    width:98%;
+    width:97%;
+    
+}
+
+.buttonSub{
+    
+    margin-left:1%;
+    margin-bottom: 1%;
+}
+
+.buttonEdi {
     
 }

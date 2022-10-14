@@ -11,7 +11,10 @@
     
    
     <h1>RAPORT DE ACTIVITATE LUNARA PENTRU SOFERI</h1>
-
+    <form> 
+      <button class="buttonSub" type="submit" value="Submit">Salveaza</button>
+      <button class="buttonEdi" type="submit" value="Submit">Editeaza</button>
+    </form> 
 
     <table>
         <tr>
@@ -21,8 +24,9 @@
           <th>Ore</th>
           <th>Observatii</th>
         </tr>
+        {% for i in weekdays %}
         <tr>
-          <td class = "date">1</td>
+          <td class = "date">{{i}}</td>
           <td >
             <input class="box-text" type="text"/>
           </td>
@@ -35,24 +39,12 @@
           <td>
             <input  class="box-text"  type="text"/>
           </td>
+          
         </tr>
-        <tr>
-          <td class="date">2</td>
-          <td>
-            <input  class="box-text"  type="text"/>
-          </td>
-          <td>
-            <input  class="box-text"  type="text"/>
-          </td>
-          <td>
-            <input  class="box-text"  type="text"/>
-          </td>
-          <td>
-            <input  class="box-text"  type="text"/>
-          </td>
-        </tr>
+        {% endfor %}
+        
       </table>
-    
+      
     
     
         

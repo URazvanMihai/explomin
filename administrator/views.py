@@ -45,7 +45,9 @@ def user(request):
 
 def pontaj(request):
   template = loader.get_template('pontaj.html')
+  weekdays = range(1,32)
   context = {
+    'weekdays': weekdays,
 
   }
   return HttpResponse(template.render(context, request)) 
