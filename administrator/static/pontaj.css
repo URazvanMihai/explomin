@@ -2,10 +2,14 @@ table ,th,td {
     border:1px solid black;
     border-collapse: collapse;
     
+    
+    
 }
 
 table,tr {
-    width:90%;
+    width:100%;
+    
+    
 }
 
 
@@ -19,15 +23,51 @@ h1 {
 }
 
 .box-text {
-    width:97%;
+    width:98%;
+    display: flex;
+
     
 }
 
 .buttonSub{
-    
+    font-size: 20px;
     margin-left:1%;
     margin-bottom: 1%;
+    background-color: rgba(2, 180, 245, 0.875);
+}
+
+.buttonSub:hover {
+    background-color: rgba(9, 184, 21, 0.845);
+    color: rgb(0, 0, 0);
+
 }
 
 
+
+.buttonEdi{
+    font-size: 20px;
+    margin-left:1%;
+    margin-bottom: 1%;
+    background-color: rgba(245, 176, 2, 0.875);
+}
+
+.buttonEdi:hover {
+    background-color: rgba(9, 184, 21, 0.845);
+    color: rgb(0, 0, 0);
+
+}
+
+
+
+
+
+
+
+
+
+
+    
+ 
+    
+  
 

@@ -1,12 +1,12 @@
 .admin-container {
-    display: inline-felx;
+    
     flex-direction: row;
     text-align: center;
 }
 
 .admin-job {
     display: inline-flex;
-    border: 1px solid rgb(250, 4, 4);
+    border: 1px solid rgb(0, 0, 0);
     width: 30%;
     min-width: 250px;
     flex-direction: column;
@@ -20,9 +20,7 @@
     
 }
 
-.azot {
-    /* margin-top: 50px; */
-}
+
 
 .titlu-echipa {
     font-weight: 600;
