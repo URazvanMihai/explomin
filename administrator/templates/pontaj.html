@@ -11,11 +11,13 @@
     
    
     <h1>RAPORT DE ACTIVITATE LUNARA PENTRU SOFERI</h1>
-    <form> 
+    <!-- <form> 
       <button class="buttonSub" type="submit" value="Submit">Salveaza</button>
       <button class="buttonEdi" type="submit" value="Submit">Editeaza</button>
-    </form> 
-
+    </form>  -->
+    <form action="buttonpost" method = "POST" enctype = "multipart/form-data">
+    {% csrf_token %}
+    
     <table>
         <tr>
           <th>Data</th>
@@ -24,27 +26,36 @@
           <th>Ore</th>
           <th>Observatii</th>
         </tr>
-        {% for i in weekdays %}
-        <tr>
-          <td class = "date">{{i}}</td>
-          <td >
-            <input class="box-text" type="text"/>
-          </td>
-          <td>
-            <input  class="box-text"  type="text"/>
-          </td>
-          <td>
-            <input  class="box-text"  type="text"/>
-          </td>
-          <td>
-            <input  class="box-text"  type="text"/>
-          </td>
+
+          {{ form.as_ul}}
+        
+          <input class="buttonSub" type="submit" value="Submit">Salveaza</input>
+          {% for i in weekdays %}
           
-        </tr>
-        {% endfor %}
+            
+            <tr>
+              <td class = "date">{{i}}</td>
+              
+              <td >
+               
+                
+                <input class="box-text" type="text"  />
+              </td>
+              <td>
+                <input  class="box-text"  type="text" />
+              </td>
+              <td>
+                <input  class="box-text"  type="text" />
+              </td>
+              <td>
+                <input  class="box-text"  type="text" />
+              </td>
+          
+            </tr>
+          {% endfor %}
         
       </table>
-      
+    </form>   
     
     
         

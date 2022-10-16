@@ -7,7 +7,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
 from administrator.models import People, Locations
-
+from .models import Postform
+from .forms import Postform
 
 
 
@@ -105,3 +106,17 @@ def logout_view(request):
         logout(request)
         return redirect('administrator:login')
 
+
+# CRUD
+
+def create_post(request):
+  context= {}
+
+  form = Postform(request.POST or None)
+  if form.is_valid():
+      form.save()
+
+
+  context['form'] =  form
+
+  return render(request,"pontaj.html",context)    
