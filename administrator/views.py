@@ -8,7 +8,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
 from administrator.models import People, Locations
 from .models import Postform
-from .forms import Postform
+# from .forms import Postform
+from django.forms import modelformset_factory
 
 
 
@@ -110,13 +111,12 @@ def logout_view(request):
 # CRUD
 
 def create_post(request):
-  context= {}
+    PontajFormSet = modelformset_factory(Postform, fields=('ruta','km','ore','observatii'))
 
-  form = Postform(request.POST or None)
-  if form.is_valid():
-      form.save()
+    if request.method == 'POST':
+        form = PontajFormSet(request.POST)
+        form.save()
 
+    form = PontajFormSet()
 
-  context['form'] =  form
-
-  return render(request,"pontaj.html",context)    
+    return render(request, "pontaj.html", {'form': form})
