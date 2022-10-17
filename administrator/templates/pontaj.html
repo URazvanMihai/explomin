@@ -1,67 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Explomin</title>
     {% load static %} {% load permission_tags %}
     <link rel="stylesheet" type="text/css" href="{% static 'pontaj.css' %}">
-    
-    
+
+
 </head>
-<body class = "body">
-    
-   
+
+<body class="body">
     <h1>RAPORT DE ACTIVITATE LUNARA PENTRU SOFERI</h1>
-    <!-- <form> 
-      <button class="buttonSub" type="submit" value="Submit">Salveaza</button>
-      <button class="buttonEdi" type="submit" value="Submit">Editeaza</button>
-    </form>  -->
-    <form action="buttonpost" method = "POST" enctype = "multipart/form-data">
-    {% csrf_token %}
-    
-    <table>
-        <tr>
-          <th>Data</th>
-          <th>Ruta-Traseu</th>
-          <th>Km</th>
-          <th>Ore</th>
-          <th>Observatii</th>
-        </tr>
 
-          {{ form.as_ul}}
-        
-          <input class="buttonSub" type="submit" value="Submit">Salveaza</input>
-          {% for i in weekdays %}
-          
-            
+    <form method="POST">
+        {% csrf_token %}
+        <input class="buttonSub" type="submit" />
+        <table>
             <tr>
-              <td class = "date">{{i}}</td>
-              
-              <td >
-               
-                
-                <input class="box-text" type="text"  />
-              </td>
-              <td>
-                <input  class="box-text"  type="text" />
-              </td>
-              <td>
-                <input  class="box-text"  type="text" />
-              </td>
-              <td>
-                <input  class="box-text"  type="text" />
-              </td>
-          
+                <th>Data</th>
+                <th>Ruta-Traseu</th>
+                <th>Km</th>
+                <th>Ore</th>
+                <th>Observatii</th>
             </tr>
-          {% endfor %}
-        
-      </table>
-    </form>   
-    
-    
-        
-   
-        
 
+            {{ form.as_table}}
 
+            <!-- <input class="buttonSub" type="submit" value="Submit">Salveaza</input> -->
+            <!-- {% for i in data %}
+            <tr>
+                <td class="date">{{i}}</td>
+                <td>
+                    <input class="box-text" type="text" />
+                </td>
+                <td>
+                    <input class="box-text" type="text" />
+                </td>
+                <td>
+                    <input class="box-text" type="text" />
+                </td>
+                <td>
+                    <input class="box-text" type="text" />
+                </td>
+            </tr>
+            {% endfor %} -->
+        </table>
+    </form>
 </body>
+
 </html>
