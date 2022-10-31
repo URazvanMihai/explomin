@@ -8,10 +8,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
 from administrator.models import People, Locations
 from .models import Postform
-# from .forms import Postform
-from django.forms import modelformset_factory
-
-
 
 # Create your views here.
 def index(request):
@@ -42,19 +38,6 @@ def user(request):
     'job':job,
   }
   return HttpResponse(template.render(context, request))
-
-
-
-def pontaj(request):
-  template = loader.get_template('pontaj.html')
-  weekdays = range(1,32)
-  context = {
-    'weekdays': weekdays,
-
-  }
-  return HttpResponse(template.render(context, request)) 
-
-
 
 def loginpage(request):
   template = loader.get_template('login.html')
@@ -111,12 +94,26 @@ def logout_view(request):
 # CRUD
 
 def create_post(request):
-    PontajFormSet = modelformset_factory(Postform, fields=('ruta','km','ore','observatii'))
+    if request.method == "POST":
+        ruta_input = request.POST['ruta']
+        km_input = request.POST['km']
+        ore_input = request.POST['ore']
+        obs_input = request.POST['obs']
 
-    if request.method == 'POST':
-        form = PontajFormSet(request.POST)
-        form.save()
+        post_form = Postform(ruta=ruta_input, km=km_input, ore=ore_input, observatii=obs_input)
+        post_form.save()
+        return redirect('administrator:pontaj')
+    else:
+        template = loader.get_template('pontaj.html')
+        pontaj_db = Postform.objects.all()
+        context = {
+            'pontaj': pontaj_db
+        }
+        return HttpResponse(template.render(context, request))
 
-    form = PontajFormSet()
-
-    return render(request, "pontaj.html", {'form': form})
+@csrf_protect
+def delete_pontaj(request):
+    if request.method == "POST":
+        pontaj = Postform.objects.get(id=19)
+        pontaj.delete()
+        return redirect('administrator:pontaj')

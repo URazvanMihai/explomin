@@ -12,40 +12,44 @@
 <body class="body">
     <h1>RAPORT DE ACTIVITATE LUNARA PENTRU SOFERI</h1>
 
-    <form method="POST">
+    <form action="pontaj" method="POST">
         {% csrf_token %}
-        <input class="buttonSub" type="submit" />
-        <table>
-            <tr>
-                <th>Data</th>
-                <th>Ruta-Traseu</th>
-                <th>Km</th>
-                <th>Ore</th>
-                <th>Observatii</th>
-            </tr>
 
-            {{ form.as_table}}
+        <div class="container">
 
-            <!-- <input class="buttonSub" type="submit" value="Submit">Salveaza</input> -->
-            <!-- {% for i in data %}
-            <tr>
-                <td class="date">{{i}}</td>
-                <td>
-                    <input class="box-text" type="text" />
-                </td>
-                <td>
-                    <input class="box-text" type="text" />
-                </td>
-                <td>
-                    <input class="box-text" type="text" />
-                </td>
-                <td>
-                    <input class="box-text" type="text" />
-                </td>
-            </tr>
-            {% endfor %} -->
-        </table>
+
+            <label for="ruta"><b>Ruta</b></label>
+            <input type="text" placeholder="Enter Ruta" name="ruta" required>
+
+            <label for="km"><b>KM</b></label>
+            <input type="text" placeholder="Enter KM" name="km" required>
+
+            <label for="ore"><b>Ore</b></label>
+            <input type="text" placeholder="Enter Ore" name="ore" required>
+
+            <label for="obs"><b>Observatii</b></label>
+            <input type="text" placeholder="Enter Observatii" name="obs" required>
+
+            <button type="submit">Submit Pontaj</button>
+
+        </div>
+
     </form>
+
+    <div class="pontaj_view">
+        {% for p in pontaj %}
+        <div class="pontaj_data">
+            <p>{{p.ruta}}</p>
+            <p>{{p.km}}</p>
+            <p>{{p.ore}}</p>
+            <p>{{p.observatii}}</p>
+            <form action="delete_pontaj" method="POST">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 
 </html>
