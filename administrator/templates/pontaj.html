@@ -43,7 +43,7 @@
             <p>{{p.km}}</p>
             <p>{{p.ore}}</p>
             <p>{{p.observatii}}</p>
-            <form action="delete_pontaj" method="POST">
+            <form action="delete_pontaj/{{p.id}}" method="POST">
                 {% csrf_token %}
                 <button type="submit">Delete</button>
             </form>

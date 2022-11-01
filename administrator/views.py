@@ -112,8 +112,8 @@ def create_post(request):
         return HttpResponse(template.render(context, request))
 
 @csrf_protect
-def delete_pontaj(request):
+def delete_pontaj(request, id):
     if request.method == "POST":
-        pontaj = Postform.objects.get(id=19)
+        pontaj = Postform.objects.get(id=id)
         pontaj.delete()
         return redirect('administrator:pontaj')
