@@ -6,8 +6,8 @@ from rolepermissions.roles import assign_role
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
-from administrator.models import People, Locations
-from .models import Postform
+from administrator.models import People, Locations, Postform, PontajToggleEdit
+from django.urls import reverse
 
 # Create your views here.
 def index(request):
@@ -106,8 +106,22 @@ def create_post(request):
     else:
         template = loader.get_template('pontaj.html')
         pontaj_db = Postform.objects.all()
+        pontaj_list = []
+
+        # print(pontaj_db.__str__())
+        for pontaj in pontaj_db:
+            p, created = PontajToggleEdit.objects.get_or_create(pontaj_id=pontaj.id)
+            pontaj_obj = {
+                'id': pontaj.id,
+                'km': pontaj.km,
+                'ore': pontaj.ore,
+                'obs': pontaj.observatii,
+                'is_edit_mode': p.is_edit_mode
+            }
+            pontaj_list.append(pontaj_obj)
+
         context = {
-            'pontaj': pontaj_db
+            'pontaje': pontaj_list
         }
         return HttpResponse(template.render(context, request))
 
@@ -117,3 +131,10 @@ def delete_pontaj(request, id):
         pontaj = Postform.objects.get(id=id)
         pontaj.delete()
         return redirect('administrator:pontaj')
+
+@csrf_protect
+def enable_edit_pontaj(request):
+    pontaj_edit = PontajToggleEdit.objects.get(pontaj_id=request.POST['pontaj_id'])
+    pontaj_edit.is_edit_mode = request.POST['is_edit_mode'] == 'true'
+    pontaj_edit.save()
+    return redirect('administrator:pontaj')

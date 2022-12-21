@@ -21,8 +21,10 @@ class Postform(models.Model):
 
 
    def __str__ (self):
+    template = '{0.ruta} {0.km} {0.ore} {0.observatii}'
+    return template.format(self)
 
-      return(self.ruta,
-            self.km,
-            self.ore,
-            self.observatii)
+class PontajToggleEdit(models.Model):
+    id = models.AutoField(primary_key=True)
+    pontaj_id = models.IntegerField(null=True)
+    is_edit_mode = models.BooleanField(default=False)

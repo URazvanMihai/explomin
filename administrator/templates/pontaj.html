@@ -37,19 +37,62 @@
     </form>
 
     <div class="pontaj_view">
-        {% for p in pontaj %}
+        {% for p in pontaje %}
         <div class="pontaj_data">
+            {% if p.is_edit_mode == False %}
             <p>{{p.ruta}}</p>
             <p>{{p.km}}</p>
             <p>{{p.ore}}</p>
             <p>{{p.observatii}}</p>
+            <p>{{p.is_edit_mode}}</p>
+            {% else %}
+            <div class="edit_pontaj">
+                <form action="save_edit_pontaj/{{p.id}}" method="POST">
+                    {% csrf_token %}
+
+                    <!-- <label for="ruta"><b>Ruta</b></label> -->
+                    <input type="text" placeholder="Enter Ruta" name="ruta" required>
+
+                    <!-- <label for="km"><b>KM</b></label> -->
+                    <input type="text" placeholder="Enter KM" name="km" required>
+
+                    <!-- <label for="ore"><b>Ore</b></label> -->
+                    <input type="text" placeholder="Enter Ore" name="ore" required>
+
+                    <!-- <label for="obs"><b>Observatii</b></label> -->
+                    <input type="text" placeholder="Enter Observatii" name="obs" required>
+
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+            {% endif %}
             <form action="delete_pontaj/{{p.id}}" method="POST">
                 {% csrf_token %}
                 <button type="submit">Delete</button>
             </form>
+            <div>
+                <label>Edit Mode</label>
+                <label class="switch">
+                    <input type="checkbox" class="checkbox" name="{{p.id}}" value="{{p.is_edit_mode}}" {% if p.is_edit_mode %} checked {% endif %}>
+                </label>
+            </div>
         </div>
         {% endfor %}
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.checkbox').change(function() {
+                console.log(this.checked)
+                $.post("/administrator/enable_edit_pontaj", {
+                    pontaj_id: this.name,
+                    is_edit_mode: this.checked,
+                    csrfmiddlewaretoken: '{{csrf_token}}'
+                })
+                location.reload()
+            })
+        })
+    </script>
 </body>
 
 </html>
