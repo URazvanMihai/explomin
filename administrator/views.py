@@ -105,7 +105,7 @@ def create_post(request):
         return redirect('administrator:pontaj')
     else:
         template = loader.get_template('pontaj.html')
-        pontaj_db = Pontaj.objects.all()
+        pontaj_db = Pontaj.objects.all().order_by('created_at')
         pontaj_list = []
 
         for pontaj in pontaj_db:
