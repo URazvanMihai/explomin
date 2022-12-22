@@ -15,4 +15,5 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("delete_pontaj/<int:id>", views.delete_pontaj, name="delete_pontaj"),
     path("enable_edit_pontaj", views.enable_edit_pontaj, name="enable_edit_pontaj"),
+    path("update_pontaj/<int:id>", views.update_pontaj, name="update_pontaj"),
 ]

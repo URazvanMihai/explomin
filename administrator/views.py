@@ -108,11 +108,11 @@ def create_post(request):
         pontaj_db = Postform.objects.all()
         pontaj_list = []
 
-        # print(pontaj_db.__str__())
         for pontaj in pontaj_db:
             p, created = PontajToggleEdit.objects.get_or_create(pontaj_id=pontaj.id)
             pontaj_obj = {
                 'id': pontaj.id,
+                'ruta': pontaj.ruta,
                 'km': pontaj.km,
                 'ore': pontaj.ore,
                 'obs': pontaj.observatii,
@@ -138,3 +138,18 @@ def enable_edit_pontaj(request):
     pontaj_edit.is_edit_mode = request.POST['is_edit_mode'] == 'true'
     pontaj_edit.save()
     return redirect('administrator:pontaj')
+
+@csrf_protect
+def update_pontaj(request, id):
+    if request.method == "POST":
+        pontaj = Postform.objects.get(id=id)
+
+        if pontaj is None:
+            return redirect('administrator:pontaj')
+        else:
+            pontaj.ruta = request.POST['ruta']
+            pontaj.km = request.POST['km']
+            pontaj.ore = request.POST['ore']
+            pontaj.observatii = request.POST['obs']
+            pontaj.save()
+            return redirect('administrator:pontaj')
