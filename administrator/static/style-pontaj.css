@@ -1,0 +1,83 @@
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table,
+tr {
+    width: 100%;
+}
+
+.date {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.box-text {
+    width: 98%;
+    display: flex;
+}
+
+.buttonSub {
+    font-size: 20px;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    background-color: rgba(2, 180, 245, 0.875);
+}
+
+.buttonSub:hover {
+    background-color: rgba(9, 184, 21, 0.845);
+    color: rgb(0, 0, 0);
+}
+
+.buttonEdi {
+    font-size: 20px;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    background-color: rgba(245, 176, 2, 0.875);
+}
+
+.buttonEdi:hover {
+    background-color: rgba(9, 184, 21, 0.845);
+    color: rgb(0, 0, 0);
+}
+
+.inline-fields label .asd {
+    display: inline-block;
+}
+
+.add-pontaj-container {
+    width: 100%;
+}
+
+.adauga-pontaj {
+    width: 90%;
+    margin-bottom: 3%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.pontaj_data {
+    margin-bottom: 5%;
+}
+
+.edit-pontaj {
+    margin-bottom: 2%;
+}
+
+.pontaj-action-buttons .action-button {
+    display: inline-block;
+}
+
+.pontaj-action-buttons {
+    margin-bottom: 2%;
+}
+
+.pontaj-line-container {
+    margin-left: 3%
+}

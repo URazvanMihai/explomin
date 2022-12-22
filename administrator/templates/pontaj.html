@@ -1,33 +1,104 @@
 <!DOCTYPE html>
-<html leng = en>
+<html>
+
 <head>
-    <title>Pontaj</title>
+    <title>Explomin</title>
+    {% load static %} {% load permission_tags %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style-pontaj.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 
+<body class="body">
+    <h1>RAPORT DE ACTIVITATE LUNARA PENTRU SOFERI</h1>
 
+    <div class="add-pontaj-container">
+        <div class="adauga-pontaj">
+            <h3>Adauga pontaj</h3>
+            <form action="pontaj" method="POST">
+                {% csrf_token %}
 
+                <label for="ruta"><b>Ruta</b></label>
+                <input type="text" placeholder="Enter Ruta" name="ruta" required>
 
+                <label for="km"><b>KM</b></label>
+                <input type="text" placeholder="Enter KM" name="km" required>
 
+                <label for="ore"><b>Ore</b></label>
+                <input type="text" placeholder="Enter Ore" name="ore" required>
 
+                <label for="obs"><b>Observatii</b></label>
+                <input type="text" placeholder="Enter Observatii" name="obs" required>
 
+                <button type="submit">Adauga</button>
+            </form>
+        </div>
+    </div>
+    <hr/>
+    <div class="pontaj-view">
+        {% for p in pontaje %}
+        <div class="pontaj_data">
+            <p><b>Creat la:</b> {{p.created_at}}</p>
+            <p><b>Schimbat la:</b> {{p.updated_at}}</p>
+            <div class="pontaj-action-buttons">
+                <div class="action-button">
+                    <label>Editeaza</label>
+                    <input type="checkbox" class="checkbox" data-pontaj-id="{{p.id}}" value="{{p.is_edit_mode}}" {% if p.is_edit_mode %} checked {% endif %}>
+                </div>
 
+                <div class="action-button">
+                    <form action="delete_pontaj/{{p.id}}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Sterge</button>
+                    </form>
+                </div>
+            </div>
+            {% if p.is_edit_mode == False %}
+            <div class="pontaj-line-container">
+                <p><b>Ruta:</b> {{p.ruta}}</p>
+                <p><b>KM:</b> {{p.km}}</p>
+                <p><b>Ore:</b> {{p.ore}}</p>
+                <p><b>Observatii:</b> {{p.obs}}</p>
+            </div>
+            {% else %}
+            <div class="edit_pontaj inline-fields">
+                <form action="update_pontaj/{{p.id}}" method="POST">
+                    {% csrf_token %}
 
+                    <label for="ruta"><b>Ruta</b></label>
+                    <input type="text" placeholder="Enter Ruta" name="ruta" required value="{{p.ruta}}">
 
+                    <label for="km"><b>KM</b></label>
+                    <input type="text" placeholder="Enter KM" name="km" required value="{{p.km}}">
 
+                    <label for="ore"><b>Ore</b></label>
+                    <input type="text" placeholder="Enter Ore" name="ore" required value="{{p.ore}}">
 
+                    <label for="obs"><b>Observatii</b></label>
+                    <input type="text" placeholder="Enter Observatii" name="obs" required value="{{p.obs}}">
 
+                    <button type="submit">Salveaza</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.checkbox').change(function() {
+                $.post("/administrator/enable_edit_pontaj", {
+                    pontaj_id: this.dataset.pontajId,
+                    is_edit_mode: this.checked,
+                    csrfmiddlewaretoken: '{{csrf_token}}'
+                })
+                location.reload()
+            })
+        })
+    </script>
+</body>
 
 </html>

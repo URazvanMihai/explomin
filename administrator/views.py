@@ -6,10 +6,8 @@ from rolepermissions.roles import assign_role
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
-from administrator.models import People, Locations
-
-
-
+from administrator.models import People, Locations, Pontaj, PontajToggleEdit
+from django.utils import timezone
 
 # Create your views here.
 def index(request):
@@ -41,17 +39,6 @@ def user(request):
   }
   return HttpResponse(template.render(context, request))
 
-
-
-def pontaj(request):
-  template = loader.get_template('pontaj.html')
-  context = {
-
-  }
-  return HttpResponse(template.render(context, request)) 
-
-
-
 def loginpage(request):
   template = loader.get_template('login.html')
   context = {
@@ -82,7 +69,7 @@ def login_user(request):
             login(request,user)
             return redirect('administrator:meniu')
         else:
-            messages.success(request, ("Error Logging In"))
+            messages.success(request, "Error Logging In")
             return redirect('administrator:login')    
 
     else:
@@ -103,3 +90,68 @@ def logout_view(request):
         logout(request)
         return redirect('administrator:login')
 
+
+# CRUD
+
+def create_post(request):
+    if request.method == "POST":
+        ruta_input = request.POST['ruta']
+        km_input = request.POST['km']
+        ore_input = request.POST['ore']
+        obs_input = request.POST['obs']
+
+        post_form = Pontaj(ruta=ruta_input, km=km_input, ore=ore_input, observatii=obs_input)
+        post_form.save()
+        return redirect('administrator:pontaj')
+    else:
+        template = loader.get_template('pontaj.html')
+        pontaj_db = Pontaj.objects.all().order_by('created_at')
+        pontaj_list = []
+
+        for pontaj in pontaj_db:
+            p, created = PontajToggleEdit.objects.get_or_create(pontaj_id=pontaj.id)
+            pontaj_obj = {
+                'id': pontaj.id,
+                'ruta': pontaj.ruta,
+                'km': pontaj.km,
+                'ore': pontaj.ore,
+                'obs': pontaj.observatii,
+                'is_edit_mode': p.is_edit_mode,
+                'created_at': pontaj.created_at,
+                'updated_at': pontaj.updated_at
+            }
+            pontaj_list.append(pontaj_obj)
+
+        context = {
+            'pontaje': pontaj_list
+        }
+        return HttpResponse(template.render(context, request))
+
+@csrf_protect
+def delete_pontaj(request, id):
+    if request.method == "POST":
+        pontaj = Pontaj.objects.get(id=id)
+        pontaj.delete()
+        return redirect('administrator:pontaj')
+
+@csrf_protect
+def enable_edit_pontaj(request):
+    pontaj_edit = PontajToggleEdit.objects.get(pontaj_id=request.POST['pontaj_id'])
+    pontaj_edit.is_edit_mode = request.POST['is_edit_mode'] == 'true'
+    pontaj_edit.save()
+    return redirect('administrator:pontaj')
+
+@csrf_protect
+def update_pontaj(request, id):
+    if request.method == "POST":
+        pontaj = Pontaj.objects.get(id=id)
+
+        if pontaj is None:
+            return redirect('administrator:pontaj')
+        else:
+            pontaj.ruta = request.POST['ruta']
+            pontaj.km = request.POST['km']
+            pontaj.ore = request.POST['ore']
+            pontaj.observatii = request.POST['obs']
+            pontaj.save()
+            return redirect('administrator:pontaj')

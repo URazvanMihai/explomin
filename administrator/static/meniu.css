@@ -3,25 +3,12 @@ html {
     height: 100%;
 }
 
-.logout{
-    font-size:20px;
-    display: block;
-    color: #000;
-    padding: 8px 10px;
-    text-decoration: none;
-    
-    
-
-}
-.logout:hover {
-    background-color: rgb(46, 78, 242);
-    color: white;
-
-}
 body  {
     background-image: url("https://www.carieradepiatra.ro/wp-content/uploads/2020/06/poza-inde-1-e1592661666578.jpg?id=6128");
+    float: none;
     display: block;
-    float: none
+    background-repeat: no-repeat; 
+    background-size: cover;
 }
 
 
@@ -56,4 +43,23 @@ ul {
   }
 
  
+.logout{
+  font-size: 20px;
+  background-color: rgba(141, 8, 8, 0.875);
+  
+  
+  
 
+}
+
+.logout:hover {
+  background-color: rgba(9, 184, 21, 0.845);
+  color: rgb(0, 0, 0);
+  
+  
+  
+
+} 
+
+
+  
