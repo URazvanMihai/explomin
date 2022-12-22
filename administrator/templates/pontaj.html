@@ -36,14 +36,31 @@
         </div>
     </div>
     <hr/>
-    <div class="pontaj_view">
+    <div class="pontaj-view">
         {% for p in pontaje %}
         <div class="pontaj_data">
+            <p><b>Creat la:</b> {{p.created_at}}</p>
+            <p><b>Schimbat la:</b> {{p.updated_at}}</p>
+            <div class="pontaj-action-buttons">
+                <div class="action-button">
+                    <label>Editeaza</label>
+                    <input type="checkbox" class="checkbox" data-pontaj-id="{{p.id}}" value="{{p.is_edit_mode}}" {% if p.is_edit_mode %} checked {% endif %}>
+                </div>
+
+                <div class="action-button">
+                    <form action="delete_pontaj/{{p.id}}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Sterge</button>
+                    </form>
+                </div>
+            </div>
             {% if p.is_edit_mode == False %}
-            <p><b>Ruta:</b> {{p.ruta}}</p>
-            <p><b>KM:</b> {{p.km}}</p>
-            <p><b>Ore:</b> {{p.ore}}</p>
-            <p><b>Observatii:</b> {{p.obs}}</p>
+            <div class="pontaj-line-container">
+                <p><b>Ruta:</b> {{p.ruta}}</p>
+                <p><b>KM:</b> {{p.km}}</p>
+                <p><b>Ore:</b> {{p.ore}}</p>
+                <p><b>Observatii:</b> {{p.obs}}</p>
+            </div>
             {% else %}
             <div class="edit_pontaj inline-fields">
                 <form action="update_pontaj/{{p.id}}" method="POST">
@@ -65,19 +82,6 @@
                 </form>
             </div>
             {% endif %}
-            <div class="pontaj-action-buttons">
-                <div class="action-button">
-                    <label>Editeaza</label>
-                    <input type="checkbox" class="checkbox" data-pontaj-id="{{p.id}}" value="{{p.is_edit_mode}}" {% if p.is_edit_mode %} checked {% endif %}>
-                </div>
-
-                <div class="action-button">
-                    <form action="delete_pontaj/{{p.id}}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit">Sterge</button>
-                    </form>
-                </div>
-            </div>
         </div>
         {% endfor %}
     </div>

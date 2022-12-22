@@ -63,7 +63,7 @@ h1 {
 }
 
 .pontaj_data {
-    margin-bottom: 2%;
+    margin-bottom: 5%;
 }
 
 .edit-pontaj {
@@ -72,4 +72,12 @@ h1 {
 
 .pontaj-action-buttons .action-button {
     display: inline-block;
+}
+
+.pontaj-action-buttons {
+    margin-bottom: 2%;
+}
+
+.pontaj-line-container {
+    margin-left: 3%
 }

@@ -6,7 +6,7 @@ from rolepermissions.roles import assign_role
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
-from administrator.models import People, Locations, Postform, PontajToggleEdit
+from administrator.models import People, Locations, Pontaj, PontajToggleEdit
 from django.urls import reverse
 
 # Create your views here.
@@ -100,12 +100,12 @@ def create_post(request):
         ore_input = request.POST['ore']
         obs_input = request.POST['obs']
 
-        post_form = Postform(ruta=ruta_input, km=km_input, ore=ore_input, observatii=obs_input)
+        post_form = Pontaj(ruta=ruta_input, km=km_input, ore=ore_input, observatii=obs_input)
         post_form.save()
         return redirect('administrator:pontaj')
     else:
         template = loader.get_template('pontaj.html')
-        pontaj_db = Postform.objects.all()
+        pontaj_db = Pontaj.objects.all()
         pontaj_list = []
 
         for pontaj in pontaj_db:
@@ -116,7 +116,9 @@ def create_post(request):
                 'km': pontaj.km,
                 'ore': pontaj.ore,
                 'obs': pontaj.observatii,
-                'is_edit_mode': p.is_edit_mode
+                'is_edit_mode': p.is_edit_mode,
+                'created_at': pontaj.created_at,
+                'updated_at': pontaj.updated_at
             }
             pontaj_list.append(pontaj_obj)
 
@@ -128,7 +130,7 @@ def create_post(request):
 @csrf_protect
 def delete_pontaj(request, id):
     if request.method == "POST":
-        pontaj = Postform.objects.get(id=id)
+        pontaj = Pontaj.objects.get(id=id)
         pontaj.delete()
         return redirect('administrator:pontaj')
 
@@ -142,7 +144,7 @@ def enable_edit_pontaj(request):
 @csrf_protect
 def update_pontaj(request, id):
     if request.method == "POST":
-        pontaj = Postform.objects.get(id=id)
+        pontaj = Pontaj.objects.get(id=id)
 
         if pontaj is None:
             return redirect('administrator:pontaj')

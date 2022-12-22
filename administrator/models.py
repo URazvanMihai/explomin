@@ -1,4 +1,9 @@
 from django.db import models
+from django.utils import timezone
+
+class AutoDateTimeField(models.DateTimeField):
+    def pre_save(self, model_instance, add):
+        return timezone.now()
 
 # Create your models here.
 
@@ -12,12 +17,14 @@ class Locations(models.Model):
 
 
 
-class Postform(models.Model):
+class Pontaj(models.Model):
    id = models.AutoField(primary_key=True)
    ruta = models.CharField(max_length = 100)
    km = models.DecimalField( max_digits=5, decimal_places=2)
    ore =  models.DecimalField( max_digits=5, decimal_places=2)
    observatii = models.CharField(max_length = 100)
+   created_at = models.DateTimeField(default=timezone.now())
+   updated_at = AutoDateTimeField(default=timezone.now())
 
 
    def __str__ (self):
