@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
 from administrator.models import People, Locations, Pontaj, PontajToggleEdit
-from django.urls import reverse
+from django.utils import timezone
 
 # Create your views here.
 def index(request):
