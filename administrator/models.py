@@ -30,3 +30,8 @@ class PontajToggleEdit(models.Model):
     id = models.AutoField(primary_key=True)
     pontaj_id = models.IntegerField(null=True)
     is_edit_mode = models.BooleanField(default=False)
+
+class Masini(models.Model):
+    id = models.AutoField(primary_key=True)
+    numar = models.CharField(max_length=50)
+    marca = models.CharField(max_length=100)

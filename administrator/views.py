@@ -6,21 +6,25 @@ from rolepermissions.roles import assign_role
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
-from administrator.models import People, Locations, Pontaj, PontajToggleEdit
+from administrator.models import People, Locations, Pontaj, PontajToggleEdit, Masini
 from django.utils import timezone
 
 # Create your views here.
 def index(request):
   job = ['I','II','III']
   days = ['Luni', 'Marti', 'Miercuri', 'Joi',' Vineri']
+  roles = ['Coordonator', 'Artificier', 'Azot']
   locations = Locations.objects.all().values()
   peoples = People.objects.all().values()
+  masini = Masini.objects.all().values()
   template = loader.get_template('administrator.html')
   context = {
     'peoples': peoples,
     'locations': locations,
     'days': days,
-    'job':job,
+    'jobs':job,
+    'roluri': roles,
+    'masini': masini
   }
   return HttpResponse(template.render(context, request))
 
