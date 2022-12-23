@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
@@ -172,25 +173,26 @@ def create_puscare(request):
         masina_artificier = request.POST['masina_artificier']
         nume_azot = request.POST['nume_azot']
         masina_azot = request.POST['masina_azot']
-        # membrii_echipei = request.POST['membrii_echipei']
+        membrii_echipa = json.loads(request.POST['membrii_echipa'])
 
-        # puscare = Puscari(
-        #     cariera=cariera,
-        #     ora=ora,
-        #     nume_coordonator=nume_coordonator,
-        #     masina_coordonator=masina_coordonator,
-        #     nume_artificier=nume_artificier,
-        #     masina_artificier=masina_artificier,
-        #     nume_azot=nume_azot,
-        #     masina_azot=masina_azot,
-        #     membrii_id=None)
-        # puscare.save()
+        puscare = Puscari(
+            cariera=cariera,
+            ora=ora,
+            nume_coordonator=nume_coordonator,
+            masina_coordonator=masina_coordonator,
+            nume_artificier=nume_artificier,
+            masina_artificier=masina_artificier,
+            nume_azot=nume_azot,
+            masina_azot=masina_azot,
+            membrii_id=None)
+        puscare.save()
 
-        # for membru in membrii_echipei:
-        #     nume = membru.nume
-        #     masina = membru.masina
+        for membru in membrii_echipa:
+            print(membru)
+            nume = membru['nume']
+            masina = membru['masina']
 
-        #     membru = PuscareMembriiEchipei(puscare_id=puscare.id, nume_membru=nume, masina_membru=masina)
-        #     membru.save()
+            membru_model = PuscareMembriiEchipei(puscare_id=puscare.id, nume_membru=nume, masina_membru=masina)
+            membru_model.save()
 
     return HttpResponse('success')

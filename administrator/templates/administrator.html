@@ -56,7 +56,7 @@
                         <input type="text" class="search-membru" name="search" placeholder="Cauta membru echipa..." />
                     </div>
                     {% for membru in peoples %}
-                    <div class="person-container membru-container">
+                    <div class="person-container membru-container membru-container-{{day|lower}}-{{job|lower}}">
                         <input type="checkbox" name="selecteaza-membru" class="membru-nume-{{day|lower}}-{{job|lower}}">
                         <label for="vehicle1" value={{membru.name}}> {{membru.name}}</label>
                         <select name="vehicle1" class="car" id="membru-masina-{{day|lower}}-{{job|lower}}">
@@ -81,16 +81,12 @@
         $.puscari_admin = {
             init: function() {
                 this.listeners()
-
-                // this.functions.setMembers(this.functions.getAllMembers())
             },
             vars: {
-                membrii: [],
-                coll: document.getElementsByClassName("collapsible"),
-                i: 0,
-                in_membru_search: document.getElementById('search-membru'),
+                coll: document.getElementsByClassName("collapsible")
             },
             listeners: function() {
+                let i
                 for (i = 0; i < this.vars.coll.length; i++) {
                     this.vars.coll[i].addEventListener("click", function() {
                         this.classList.toggle("active");
@@ -104,9 +100,9 @@
                 }
 
                 $('.submit').click(function() {
-                    console.log('submit')
-                    btn_id = this.id
+                    lista_membrii = []
 
+                    btn_id = this.id
                     cariera = document.getElementById('cariera-' + btn_id)
                     ora = document.getElementById('ora-' + btn_id)
                     nume_coordonator = document.getElementById('nume-coordonator-' + btn_id)
@@ -116,7 +112,22 @@
                     nume_azot = document.getElementById('nume-azot-' + btn_id)
                     masina_azot = document.getElementById('masina-azot-' + btn_id)
 
-                    membrii = document.getElementsByClassName('membru-nume-' + btn_id)
+                    membrii_container = document.getElementsByClassName('membru-container-' + btn_id)
+                    for (i = 0; i < membrii_container.length; i++) {
+                        in_membru_name = membrii_container[i].querySelector('input[type=checkbox]');
+
+                        if (in_membru_name.checked) {
+                            member_name = membrii_container[i].querySelector('label').innerText;
+                            select_member_masina = membrii_container[i].querySelector('select')
+                            member_masina = select_member_masina.options[select_member_masina.selectedIndex].text;
+
+                            membru_obj = {
+                                nume: member_name,
+                                masina: member_masina
+                            }
+                            lista_membrii.push(membru_obj)
+                        }
+                    }
 
                     $.post("/administrator/create_puscare", {
                         cariera: cariera.options[cariera.selectedIndex].text,
@@ -127,6 +138,7 @@
                         masina_artificier: masina_artificier.options[masina_artificier.selectedIndex].text,
                         nume_azot: nume_azot.options[nume_azot.selectedIndex].text,
                         masina_azot: masina_azot.options[masina_azot.selectedIndex].text,
+                        membrii_echipa: JSON.stringify(lista_membrii),
                         csrfmiddlewaretoken: '{{csrf_token}}'
                     })
                 })
@@ -137,14 +149,6 @@
                 })
             },
             functions: {
-                getAllMembers: function() {
-                    $.get('/administrator/get_all_members', function(data) {
-                        console.log(data)
-                    })
-                },
-                setMembers: function(members) {
-                    this.vars.membrii = members;
-                },
                 searchMembers: function(txt) {
                     let i
                     txt_upper = txt.toUpperCase()
