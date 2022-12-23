@@ -6,7 +6,7 @@ from rolepermissions.roles import assign_role
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
-from administrator.models import People, Locations, Pontaj, PontajToggleEdit, Masini
+from administrator.models import People, Locations, Pontaj, PontajToggleEdit, Masini, Puscari, PuscareMembriiEchipei
 from django.utils import timezone
 
 # Create your views here.
@@ -159,3 +159,38 @@ def update_pontaj(request, id):
             pontaj.observatii = request.POST['obs']
             pontaj.save()
             return redirect('administrator:pontaj')
+
+@csrf_protect
+def create_puscare(request):
+    if request.method == "POST":
+        print(request.POST)
+        cariera = request.POST['cariera']
+        ora = request.POST['ora']
+        nume_coordonator = request.POST['nume_coordonator']
+        masina_coordonator = request.POST['masina_coordonator']
+        nume_artificier = request.POST['nume_artificier']
+        masina_artificier = request.POST['masina_artificier']
+        nume_azot = request.POST['nume_azot']
+        masina_azot = request.POST['masina_azot']
+        # membrii_echipei = request.POST['membrii_echipei']
+
+        # puscare = Puscari(
+        #     cariera=cariera,
+        #     ora=ora,
+        #     nume_coordonator=nume_coordonator,
+        #     masina_coordonator=masina_coordonator,
+        #     nume_artificier=nume_artificier,
+        #     masina_artificier=masina_artificier,
+        #     nume_azot=nume_azot,
+        #     masina_azot=masina_azot,
+        #     membrii_id=None)
+        # puscare.save()
+
+        # for membru in membrii_echipei:
+        #     nume = membru.nume
+        #     masina = membru.masina
+
+        #     membru = PuscareMembriiEchipei(puscare_id=puscare.id, nume_membru=nume, masina_membru=masina)
+        #     membru.save()
+
+    return HttpResponse('success')

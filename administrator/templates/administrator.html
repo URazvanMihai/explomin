@@ -10,12 +10,7 @@
     <script src="{% static 'java.js' %}"></script>
 </head>
 
-
-
-
 <body>
-
-
     {% for day in days %}
     <div class="admin-container">
         <h1>{{day}}</h1>
@@ -25,27 +20,27 @@
             <div class="admin-detalii">
                 <div>
                     <label for="cariera">Cariera: </label>
-                    <select name="cariera" id="id">        
-                        {% for cariera in locations %}                     
-                            <option value={{x.location}}>{{cariera.location}}</option>    
-                        {% endfor %}
-                    </select>
+                    <select name="cariera" class="cariera" id="cariera-{{day|lower}}-{{job|lower}}">      
+                            {% for cariera in locations %}                     
+                                <option value={{cariera.location}}>{{cariera.location}}</option>  
+                            {% endfor %}
+                        </select>
                 </div>
                 <div>
                     <label for="browser">Ora: </label>
-                    <input type="time" />
+                    <input type="time" id="ora-{{day|lower}}-{{job|lower}}" />
                 </div>
 
                 <p class="titlu-echipa">Echipa</p>
                 {% for rol in roluri %}
                 <div class="person-container">
                     <label for="browser">{{rol}}:</label>
-                    <select name="name" id="id">
+                    <select name="name" id="nume-{{rol|lower}}-{{day|lower}}-{{job|lower}}">
                             {% for coordonator in peoples %}  
                                 <option value={{coordonator.name}}>{{coordonator.name}}</option>
                             {% endfor %} 
                         </select>
-                    <select name="vehicle1" class="car" id="cars">
+                    <select name="vehicle1" class="car" id="masina-{{rol|lower}}-{{day|lower}}-{{job|lower}}">
                         {% for masina in masini %}
                             <option value="{{masina.numar}}">{{masina.numar}}</option>
                         {% endfor %}
@@ -58,14 +53,13 @@
                 <button type="button" class="collapsible">Alege membrii echipei <i class="arrow up"></i></button>
                 <div class="content">
                     <div class="person-container">
-                        <!-- <label for="cauta" value="Cauta">Cauta</label> -->
-                        <input type="text" id="membru-search" name="search" placeholder="Cauta membru echipa..." />
+                        <input type="text" class="search-membru" name="search" placeholder="Cauta membru echipa..." />
                     </div>
                     {% for membru in peoples %}
-                    <div class="person-container">
-                        <input type="checkbox" name="selecteaza-membru">
+                    <div class="person-container membru-container">
+                        <input type="checkbox" name="selecteaza-membru" class="membru-nume-{{day|lower}}-{{job|lower}}">
                         <label for="vehicle1" value={{membru.name}}> {{membru.name}}</label>
-                        <select name="vehicle1" class="car" id="cars">
+                        <select name="vehicle1" class="car" id="membru-masina-{{day|lower}}-{{job|lower}}">
                                 {% for masina in masini %}
                                     <option value="{{masina.numar}}">{{masina.numar}}</option>
                                 {% endfor %}
@@ -76,31 +70,103 @@
 
             </div>
 
-            <input type="submit" value="Submit" />
+            <button class="submit" value="Submit" id="{{day|lower}}-{{job|lower}}">Submit</button>
         </div> {% endfor %}
 
     </div>
     {% endfor %}
 
-    <script>
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $.puscari_admin = {
+            init: function() {
+                this.listeners()
 
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
+                // this.functions.setMembers(this.functions.getAllMembers())
+            },
+            vars: {
+                membrii: [],
+                coll: document.getElementsByClassName("collapsible"),
+                i: 0,
+                in_membru_search: document.getElementById('search-membru'),
+            },
+            listeners: function() {
+                for (i = 0; i < this.vars.coll.length; i++) {
+                    this.vars.coll[i].addEventListener("click", function() {
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.display === "block") {
+                            content.style.display = "none";
+                        } else {
+                            content.style.display = "block";
+                        }
+                    });
                 }
-            });
+
+                $('.submit').click(function() {
+                    console.log('submit')
+                    btn_id = this.id
+
+                    cariera = document.getElementById('cariera-' + btn_id)
+                    ora = document.getElementById('ora-' + btn_id)
+                    nume_coordonator = document.getElementById('nume-coordonator-' + btn_id)
+                    masina_coordonator = document.getElementById('masina-coordonator-' + btn_id)
+                    nume_artificier = document.getElementById('nume-artificier-' + btn_id)
+                    masina_artificier = document.getElementById('masina-artificier-' + btn_id)
+                    nume_azot = document.getElementById('nume-azot-' + btn_id)
+                    masina_azot = document.getElementById('masina-azot-' + btn_id)
+
+                    membrii = document.getElementsByClassName('membru-nume-' + btn_id)
+
+                    $.post("/administrator/create_puscare", {
+                        cariera: cariera.options[cariera.selectedIndex].text,
+                        ora: ora.value,
+                        nume_coordonator: nume_coordonator.options[nume_coordonator.selectedIndex].text,
+                        masina_coordonator: masina_coordonator.options[masina_coordonator.selectedIndex].text,
+                        nume_artificier: nume_artificier.options[nume_artificier.selectedIndex].text,
+                        masina_artificier: masina_artificier.options[masina_artificier.selectedIndex].text,
+                        nume_azot: nume_azot.options[nume_azot.selectedIndex].text,
+                        masina_azot: masina_azot.options[masina_azot.selectedIndex].text,
+                        csrfmiddlewaretoken: '{{csrf_token}}'
+                    })
+                })
+
+                $('.search-membru').on('input', function() {
+                    search_txt = this.value
+                    $.puscari_admin.functions.searchMembers(search_txt)
+                })
+            },
+            functions: {
+                getAllMembers: function() {
+                    $.get('/administrator/get_all_members', function(data) {
+                        console.log(data)
+                    })
+                },
+                setMembers: function(members) {
+                    this.vars.membrii = members;
+                },
+                searchMembers: function(txt) {
+                    let i
+                    txt_upper = txt.toUpperCase()
+                    membru_container = document.getElementsByClassName('membru-container')
+                    for (i = 0; i < membru_container.length; i++) {
+                        txt_member_name = membru_container[i].querySelector('label').innerText;
+                        txt_member_name_upper = txt_member_name.toUpperCase();
+
+                        if (txt_member_name_upper.includes(txt_upper)) {
+                            membru_container[i].style.display = ''
+                        } else {
+                            membru_container[i].style.display = 'None'
+                        }
+                    }
+                }
+            }
         }
+
+        $(document).ready(function() {
+            $.puscari_admin.init()
+        })
     </script>
-
 </body>
-
-
 
 </html>

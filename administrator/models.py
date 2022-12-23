@@ -35,3 +35,25 @@ class Masini(models.Model):
     id = models.AutoField(primary_key=True)
     numar = models.CharField(max_length=50)
     marca = models.CharField(max_length=100)
+
+class Puscari(models.Model):
+    id = models.AutoField(primary_key=True)
+    cariera = models.CharField(max_length=150)
+    ora = models.TimeField(auto_now=False, auto_now_add=False)
+    nume_coordonator = models.CharField(max_length=150)
+    masina_coordonator = models.CharField(max_length=150)
+    nume_artificier = models.CharField(max_length=150)
+    masina_artificier = models.CharField(max_length=150)
+    nume_azot = models.CharField(max_length=150)
+    masina_azot = models.CharField(max_length=150)
+    membrii_id = models.IntegerField(null=True) #delete membrii id
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class PuscareMembriiEchipei(models.Model):
+    id = models.AutoField(primary_key=True)
+    puscare_id = models.IntegerField(null=False)
+    nume_membru = models.CharField(max_length=150)
+    masina_membru = models.CharField(max_length=150)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
