@@ -7,13 +7,15 @@
     {% load static %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'administrator.css' %}">
-    <script src="{% static 'java.js' %}"></script>
 </head>
 
 <body>
+    <div>
+        <input type="week" name="week" id="week-selector" min="1970-W1" max="2070-W52" />
+    </div>
     {% for day in days %}
     <div class="admin-container">
-        <h1>{{day}}</h1>
+        <h1 id="day-{{day|lower}}">{{day}}</h1>
         {% for job in jobs %}
         <div class="admin-job">
             <h2>{{job}}</h2>
@@ -77,6 +79,7 @@
     {% endfor %}
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
         $.puscari_admin = {
             init: function() {
@@ -147,6 +150,31 @@
                     search_txt = this.value
                     $.puscari_admin.functions.searchMembers(search_txt)
                 })
+
+                $('#week-selector').on('change', function() {
+                    const week_selector = document.getElementById('week-selector')
+                    const week_value = week_selector.value
+
+                    let week = moment(week_value, 'YYYY-W##')
+
+                    const selected_start_date = week.startOf('isoWeek').format('YYYY-MM-DD')
+                    const selected_end_date = week.endOf('isoWeek').format('YYYY-MM-DD')
+
+                    $.post("/administrator/get_puscare_by_date_range", {
+                        start_date: selected_start_date,
+                        end_date: selected_end_date,
+                        csrfmiddlewaretoken: '{{csrf_token}}'
+                    }).then(function(response) {
+                        let data = response.data
+
+                        let result = $.puscari_admin.functions.groupByField(data, 'ziua')
+                        console.log(result)
+
+                        $.puscari_admin.functions.changeTitlesByDate(selected_start_date, selected_end_date)
+                    }).catch(function(err) {
+                        console.log(err)
+                    })
+                })
             },
             functions: {
                 searchMembers: function(txt) {
@@ -162,6 +190,42 @@
                         } else {
                             membru_container[i].style.display = 'None'
                         }
+                    }
+                },
+                groupByField: function(data, field_name) {
+                    const result = data.reduce((result, curr) => {
+                        const field = curr[field_name]
+
+                        if (!result[field]) {
+                            result[field] = []
+                        }
+
+                        result[field].push(curr)
+                        return result
+                    }, {})
+                    return result
+                },
+                changeTitlesByDate: function(start_date, end_date) {
+                    weekStartDay = moment(start_date)
+                    weekLastDay = moment(end_date)
+                    daysRO = {
+                        'Monday': 'Luni',
+                        'Tuesday': 'Marti',
+                        'Wednesday': 'Miercuri',
+                        'Thursday': 'Joi',
+                        'Friday': 'Vineri',
+                        'Saturday': 'Sambata',
+                        'Sunday': 'Duminica'
+                    }
+
+                    while (weekStartDay.isSameOrBefore(weekLastDay)) {
+                        current_day = daysRO[weekStartDay.format('dddd')]
+                        day_title = document.getElementById('day-' + current_day.toLowerCase())
+                        formatted_date = '(' + weekStartDay.format('YYYY-MM-DD') + ')' || "";
+                        if (day_title) {
+                            day_title.innerText = current_day + formatted_date
+                        }
+                        weekStartDay.add(1, 'days')
                     }
                 }
             }

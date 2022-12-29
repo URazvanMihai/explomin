@@ -39,6 +39,7 @@ class Masini(models.Model):
 class Puscari(models.Model):
     id = models.AutoField(primary_key=True)
     cariera = models.CharField(max_length=150)
+    ziua = models.DateField(auto_now_add=False, auto_now=False, null=True)
     ora = models.TimeField(auto_now=False, auto_now_add=False)
     nume_coordonator = models.CharField(max_length=150)
     masina_coordonator = models.CharField(max_length=150)

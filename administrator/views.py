@@ -1,19 +1,18 @@
 import json
 from django.shortcuts import render, redirect
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from rolepermissions.roles import assign_role
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
 from administrator.models import People, Locations, Pontaj, PontajToggleEdit, Masini, Puscari, PuscareMembriiEchipei
-from django.utils import timezone
 
 # Create your views here.
 def index(request):
   job = ['I','II','III']
-  days = ['Luni', 'Marti', 'Miercuri', 'Joi',' Vineri']
+  days = ['Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri']
   roles = ['Coordonator', 'Artificier', 'Azot']
   locations = Locations.objects.all().values()
   peoples = People.objects.all().values()
@@ -164,7 +163,6 @@ def update_pontaj(request, id):
 @csrf_protect
 def create_puscare(request):
     if request.method == "POST":
-        print(request.POST)
         cariera = request.POST['cariera']
         ora = request.POST['ora']
         nume_coordonator = request.POST['nume_coordonator']
@@ -188,7 +186,6 @@ def create_puscare(request):
         puscare.save()
 
         for membru in membrii_echipa:
-            print(membru)
             nume = membru['nume']
             masina = membru['masina']
 
@@ -196,3 +193,16 @@ def create_puscare(request):
             membru_model.save()
 
     return HttpResponse('success')
+
+@csrf_protect
+def get_puscare_by_date_range(request):
+    if request.method == "POST":
+        start_date = request.POST['start_date'] 
+        end_date = request.POST['end_date']
+
+        puscari_by_date = Puscari.objects.filter(ziua__gte=start_date, ziua__lte=end_date)
+        puscari_list = list(puscari_by_date.values())
+
+        return JsonResponse({'data': puscari_list})
+    return JsonResponse({'data': 'not implemented'})
+

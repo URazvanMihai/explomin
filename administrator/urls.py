@@ -16,5 +16,6 @@ urlpatterns = [
     path("delete_pontaj/<int:id>", views.delete_pontaj, name="delete_pontaj"),
     path("enable_edit_pontaj", views.enable_edit_pontaj, name="enable_edit_pontaj"),
     path("update_pontaj/<int:id>", views.update_pontaj, name="update_pontaj"),
-    path("create_puscare", views.create_puscare, name="create_puscare")
+    path("create_puscare", views.create_puscare, name="create_puscare"),
+    path("get_puscare_by_date_range", views.get_puscare_by_date_range, name="get_puscare_by_date_range")
 ]
