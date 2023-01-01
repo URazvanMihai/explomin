@@ -38,6 +38,7 @@ class Masini(models.Model):
 
 class Puscari(models.Model):
     id = models.AutoField(primary_key=True)
+    job_id = models.CharField(max_length=5, null=True)
     cariera = models.CharField(max_length=150)
     ziua = models.DateField(auto_now_add=False, auto_now=False, null=True)
     ora = models.TimeField(auto_now=False, auto_now_add=False)
@@ -47,7 +48,6 @@ class Puscari(models.Model):
     masina_artificier = models.CharField(max_length=150)
     nume_azot = models.CharField(max_length=150)
     masina_azot = models.CharField(max_length=150)
-    membrii_id = models.IntegerField(null=True) #delete membrii id
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

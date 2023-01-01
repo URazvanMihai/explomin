@@ -163,6 +163,7 @@ def update_pontaj(request, id):
 @csrf_protect
 def create_puscare(request):
     if request.method == "POST":
+        job_id = request.POST['job_id']
         cariera = request.POST['cariera']
         ora = request.POST['ora']
         nume_coordonator = request.POST['nume_coordonator']
@@ -172,8 +173,10 @@ def create_puscare(request):
         nume_azot = request.POST['nume_azot']
         masina_azot = request.POST['masina_azot']
         membrii_echipa = json.loads(request.POST['membrii_echipa'])
+        ziua = request.POST['ziua']
 
         puscare = Puscari(
+            job_id=job_id,
             cariera=cariera,
             ora=ora,
             nume_coordonator=nume_coordonator,
@@ -182,7 +185,7 @@ def create_puscare(request):
             masina_artificier=masina_artificier,
             nume_azot=nume_azot,
             masina_azot=masina_azot,
-            membrii_id=None)
+            ziua=ziua)
         puscare.save()
 
         for membru in membrii_echipa:
@@ -202,6 +205,11 @@ def get_puscare_by_date_range(request):
 
         puscari_by_date = Puscari.objects.filter(ziua__gte=start_date, ziua__lte=end_date)
         puscari_list = list(puscari_by_date.values())
+
+        for puscare in puscari_list:
+            puscare_membrii = PuscareMembriiEchipei.objects.filter(puscare_id=puscare['id'])
+            puscare['membrii'] = list(puscare_membrii.values())
+
 
         return JsonResponse({'data': puscari_list})
     return JsonResponse({'data': 'not implemented'})
